@@ -8,7 +8,7 @@ mod tests;
 declare_id!("ALWmoQi8Xtdd3rxB9PXSRfYv5m7yicgpJgmdrvJgSD1K");
 
 #[program]
-pub mod vault {
+pub mod crud {
     use super::*;
 
     pub fn create_journal_entry(
