@@ -1,11 +1,10 @@
-use anchor_lang::accounts::signer;
 use anchor_lang::prelude::*;
-use anchor_lang::system_program::{transfer, Transfer};
+
 
 #[cfg(test)]
 mod tests;
 
-declare_id!("ALWmoQi8Xtdd3rxB9PXSRfYv5m7yicgpJgmdrvJgSD1K");
+declare_id!("4p4QUhfsxz1VvyYvJLjH5NoyGwJRVQ8j6jxS4iueDAZ8");
 
 #[program]
 pub mod crud {
