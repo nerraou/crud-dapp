@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { createEntry } from "../../lib/crud";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useJournal } from "../../hooks/useJournal";
 
 export default function CreateEntry() {
   const [title, setTitle] = useState("title");
   const [message, setMessage] = useState("hello world");
-  const wallet = useWallet();
+
+  const { create } = useJournal();
 
   const handleCreate = async () => {
     console.log(title, message);
-    await createEntry(title, message, wallet);
+
+    await create(title, message);
     alert("Created!");
   };
 

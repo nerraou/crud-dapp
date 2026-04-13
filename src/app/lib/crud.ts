@@ -1,23 +1,27 @@
-import { SystemProgram } from "@solana/web3.js";
+import { PublicKey, SystemProgram } from "@solana/web3.js";
 import { getProgram, getProvider } from "./anchor";
 import { getJournalPDA } from "./pda";
+import { useJournal } from "../hooks/useJournal";
 
 export const createEntry = async (
   title: string,
   message: string,
-  wallet: any
+  program: any,
+  publicKey: any
 ) => {
-  const program = getProgram(wallet);
-  const provider = getProvider(wallet);
-  console.log("provider", { provider });
-  const owner = provider.wallet.publicKey;
+  const owner = publicKey;
 
   console.log({ owner });
 
-  const pda = getJournalPDA(title, owner);
+  //   const pda = getJournalPDA(title, owner);
 
-  console.log("Title:", title);
-  console.log("Owner:", owner.toBase58());
+  const pda = PublicKey.findProgramAddressSync(
+    [Buffer.from(title), owner.toBuffer()],
+    publicKey
+  )[0];
+
+  //   console.log("Title:", title);
+  //   console.log("Owner:", owner?.toBase58());
   console.log("PDA:", pda.toBase58());
 
   const result = await program.methods
@@ -33,10 +37,8 @@ export const createEntry = async (
   return result;
 };
 
-export const getEntry = async (title: string, wallet: any) => {
-  const program = getProgram(wallet);
-  const provider = getProvider(wallet);
-  const owner = provider.wallet.publicKey;
+export const getEntry = async (title: string, program: any, publicKey: any) => {
+  const owner = publicKey;
 
   const pda = getJournalPDA(title, owner);
 
@@ -54,10 +56,8 @@ export const getEntry = async (title: string, wallet: any) => {
   }
 };
 
-export const getUserEntries = async (wallet: any) => {
-  const program = getProgram(wallet);
-  const provider = getProvider(wallet);
-  const owner = provider.wallet.publicKey;
+export const getUserEntries = async (program: any, publicKey: any) => {
+  const owner = publicKey;
 
   const entries = await program.account.journalEntryState.all([
     {
