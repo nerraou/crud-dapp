@@ -13,6 +13,7 @@ export const createEntry = async (
 
   console.log({ owner });
 
+  console.log(program.programId.toBase58());
   //   const pda = getJournalPDA(title, owner);
 
   const pda = PublicKey.findProgramAddressSync(

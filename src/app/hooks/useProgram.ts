@@ -9,8 +9,8 @@ import {
   useWallet,
 } from "@solana/wallet-adapter-react";
 
-import Idl from "../idl/crud.json";
-import { Crud } from "../idl/crud";
+import Idl from "../../../anchor/target/idl/crud.json";
+import { Crud } from "../../../anchor/target/types/crud";
 import { useEffect } from "react";
 
 interface UseProgramReturn {
